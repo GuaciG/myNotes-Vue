@@ -26,7 +26,10 @@ onMounted(async () => {
         <CreateNote />
       </li>
       <li v-for="note in noteStore.notes" :key="note.id" class="title">
-          <NoteCard :note="note" />
+          <NoteCard 
+            :note="note"
+            @delete-note="noteStore.deleteNote"
+          />
       </li>
       <li v-if="noteStore.notes.length === 0" class="empty-msg">
         <h2>No hay notas que mostrar. Crea tu primera nota!</h2>

@@ -47,11 +47,24 @@ export const useNoteStore = defineStore("notes", () => {
     }
   };
 
+  const deleteNote = async (id) => {
+    try {
+      await fetch(API_URL + id, {
+        method: "DELETE",
+      });
+      notes.value = notes.value.filter((note) => note.id !== id);
+    } catch (error) {
+      console.error("Error eliminando nota:", error);
+      error.value = true;
+    }
+  };
+
   return {
     notes,
     loading,
     error,
     addNote,
     getNotes,
+    deleteNote,
   };
 });
